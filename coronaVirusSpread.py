@@ -2,23 +2,26 @@ import random
 
 class Individual:
 
-    gridSize
+    #gridSize 
     travelTime = 10
 
     def __init__(self):
         """ TO DO: make initial spawns according to earth population distributions"""
         """ TO DO: make them able to travel to other countries(maybe other grids for other countries)"""
 
-        self.xcoord = random.randint(1, gridSize) #all continents are 1000x1000
-        self.ycoord = random.randint(1, gridSize)
+        self.xcoord = random.randint(1, self.gridSize) #all continents are 1000x1000
+        self.ycoord = random.randint(1, self.gridSize)
         self.infectionStatus = 'healthy' # healthy, infected, cured, dead.
-        self.homeContinent # random.choise(list) from dist.
-        self.CurrenttTravelTimeLeft = 0 
-        self.currentContinent = homeContinent # current continent location, will determine grid
+        self.homeContinent = 'Asia' # random.choise(list) from dist.
+        self.CurrentTravelTimeLeft = 0 
+        self.currentContinent = self.homeContinent # current continent location, will determine grid
 
     def status(self):
         print("(x , y)=","(",self.xcoord,",", self.ycoord,")")
 
+    def determineHomeContinent(self):
+        pass
+    
     def randomWalk(self): # ITS WORKING!
         rn = random.uniform(0, 1)
         if (rn <= 0.25 and self.xcoord > 0):
@@ -48,9 +51,9 @@ class Individual:
             print('ERROR in travelDestination')
 
     def travelCountdown(self):
-        if (self.CurrenttTravelTimeLeft < 0):
+        if (self.CurrentTravelTimeLeft < 0):
             print("ERROR in travelCountdown, should not be able to enter this funtion")
-        self.CurrenttTravelTimeLeft-=1
+        self.CurrentTravelTimeLeft-=1
     
     def travelHome(self):
         self.currentContinent = self.homeContinent
@@ -74,6 +77,9 @@ def main():
     
     for i in range (0, POPULATION_SIZE):
         population[i].randomWalk()
+    print(population[3].gridSize)
+    print(Individual.gridSize)
+    print("Run sucessfull")
 
 
 if __name__ == "__main__":
